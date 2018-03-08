@@ -2,7 +2,7 @@
   <div id="app">
     <AddPost :submit="submit"/>
     <h2>The Posts:</h2>
-    <Post v-for="post in posts" :thePost="post" :remove="remove" :edit="edit" :key="post.id" />
+    <Post v-for="post in posts" :thePost="post" :remove="remove" :edit="edit" :toggle="toggleEditting" :isEditting="isEditting" :key="post.id" />
   </div>
 </template>
 
@@ -28,6 +28,9 @@ export default {
     },
     edit(post) {
       console.log("post", post);
+    },
+    toggleEditting(id) {
+      this.isEditting = id;
     }
   },
   data: () => {
@@ -53,7 +56,8 @@ export default {
     ];
     return {
       posts,
-      postCount: posts.length
+      postCount: posts.length,
+      isEditting: null
     };
   }
 };

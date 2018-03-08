@@ -1,10 +1,10 @@
 <template>
   <div class="hello">
-    <span v-if="!isEditting">
+    <span v-if="isEditting !== thePost.id">
       <h3>{{ thePost.title }}</h3>
       <p>{{ thePost.author }}</p>
       <p>{{ thePost.label }}</p>
-      <button @click="() => { edit(thePost.id); toggleEditting(); }">edit</button>
+      <button @click="() => { edit(thePost.id); toggle(thePost.id); }">edit</button>
       <button @click="() => { remove(thePost.id); }">X</button>
     </span>
     <span v-else>
@@ -24,16 +24,10 @@ export default {
   props: {
     thePost: { title: String, author: String, label: String, id: Number },
     remove: Function,
-    edit: Function
-  },
-  methods: {
-    toggleEditting() {
-      this.isEditting = !this.isEditting;
-    }
-  },
-  data: () => ({
-    isEditting: false
-  })
+    edit: Function,
+    toggle: Function,
+    isEditting: Number
+  }
 };
 </script>
 
