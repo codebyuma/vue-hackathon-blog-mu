@@ -1,18 +1,40 @@
 <template>
   <div class="hello">
-    <h3>{{ thePost.title }}</h3>
-    <p>{{ thePost.author }}</p>
-    <p>{{ thePost.label }}</p>
-    <button v-on:click="() => { remove(thePost.id); }">X</button>
+    <span v-if="!isEditting">
+      <h3>{{ thePost.title }}</h3>
+      <p>{{ thePost.author }}</p>
+      <p>{{ thePost.label }}</p>
+      <button @click="() => { edit(thePost.id); toggleEditting(); }">edit</button>
+      <button @click="() => { remove(thePost.id); }">X</button>
+    </span>
+    <span v-else>
+      <AddPost :submit="edit" :newPost="thePost"/>
+    </span>
   </div>
 </template>
 
 <script>
+import AddPost from "./addPost.vue";
+
 export default {
-  name: 'Post',
-  props: {'thePost': { title: String, author: String, label: String, id: Number },
-  remove: Function}
-}
+  name: "Post",
+  components: {
+    AddPost
+  },
+  props: {
+    thePost: { title: String, author: String, label: String, id: Number },
+    remove: Function,
+    edit: Function
+  },
+  methods: {
+    toggleEditting() {
+      this.isEditting = !this.isEditting;
+    }
+  },
+  data: () => ({
+    isEditting: false
+  })
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

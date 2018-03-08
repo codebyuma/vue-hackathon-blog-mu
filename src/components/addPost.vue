@@ -12,20 +12,31 @@
 
 <script>
 export default {
-  name: 'AddPost',
+  name: "AddPost",
   props: {
-      submit: Function
+    submit: Function,
+    newPost: {
+      default: function() {
+        return {
+          title: "",
+          author: "",
+          label: ""
+        };
+      },
+      type: Object
+    }
   },
   methods: {
-      clearForm() {
-          this.newPost = {}
-      }
-  },
-  data: () => ({
-    newPost: {
-    title: '',
-    author: '',
-    label: '',
-  }})
-}
+    clearForm() {
+      this.newPost = {};
+    }
+  }
+  //   data: () => ({
+  //     newPost: {
+  //       title: "",
+  //       author: "",
+  //       label: ""
+  //     }
+  //   })
+};
 </script>
